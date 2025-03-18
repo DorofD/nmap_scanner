@@ -1,0 +1,11 @@
+{
+    "hosts": [
+        {"host_name": "some_host_1", "host_ip": "192.168.1.1"},
+        {"host_name": "some_host_2", "host_ip": "14.88.22.8"}
+    ],
+    "nmap_arguments": "-T4 --unprivileged",
+    "port_range": "1-65535",
+    "tg_bot_token": "1234567890:01234ABCDEFGHIJ_abcdefghijklmnopqrstuvw",
+    "alert_tg_chat_id": "-1234567890000",
+    "check_interval_hours": 24
+}

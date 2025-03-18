@@ -1,0 +1,9 @@
+services:
+    nmap_scanner:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: nmap_scanner
+        volumes:
+            - ./app/conf.json:/app/conf.json
+        restart: always
