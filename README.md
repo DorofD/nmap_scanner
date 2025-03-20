@@ -1,4 +1,4 @@
-Check  balance of  selectel accounts and receive notifications in the telegram
+Scan ports and send reports to Telegram chat
 
 
 ### Install
