@@ -19,28 +19,32 @@ class Scanner():
                 scanner.scan(host_note['host_ip'],
                              self.port_range, arguments=self.nmap_args)
 
+                try:
+                    state = scanner[host_note['host_ip']].state()
+                except:
+                    state = 'unknown'
                 host_result = {
                     'host_name': host_note['host_name'],
                     'host_ip': host_note['host_ip'],
-                    'state': scanner[host_note['host_ip']].state(),
+                    'state': state,
                     'protocols': []
                 }
-
-                for proto in scanner[host_note['host_ip']].all_protocols():
-                    protocol_result = {
-                        'protocol': proto,
-                        'ports': []
-                    }
-
-                    ports = scanner[host_note['host_ip']][proto].keys()
-                    for port in sorted(ports):
-                        port_info = {
-                            'port': port,
-                            'state': scanner[host_note['host_ip']][proto][port]['state']
+                if state != 'unknown':
+                    for proto in scanner[host_note['host_ip']].all_protocols():
+                        protocol_result = {
+                            'protocol': proto,
+                            'ports': []
                         }
-                        protocol_result['ports'].append(port_info)
 
-                    host_result['protocols'].append(protocol_result)
+                        ports = scanner[host_note['host_ip']][proto].keys()
+                        for port in sorted(ports):
+                            port_info = {
+                                'port': port,
+                                'state': scanner[host_note['host_ip']][proto][port]['state']
+                            }
+                            protocol_result['ports'].append(port_info)
+
+                        host_result['protocols'].append(protocol_result)
 
                 result.append(host_result)
 
